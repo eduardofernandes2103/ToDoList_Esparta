@@ -11,6 +11,19 @@ function App() {
     setTasks([...tasks, addTask])
   }
 
+  const handleCompleteTask = (task) =>{
+    const newElement = tasks.filter((element) => element !== task)
+    setTasks(newElement);
+    setCompletedTask([...completedTask, task])
+  }
+
+  const handleUncompleteTask = (task) =>{
+    const newElement = tasks.filter((element) => element !== task)
+    setCompletedTask(newElement);
+    setTasks([...tasks, task])
+  }
+
+  
   return (
     <div>
       
@@ -30,7 +43,21 @@ function App() {
             <Card 
               key={index}
               name={task}
+              click1={() => handleCompleteTask(task)}
               children1="Done!"
+            />
+          ))}
+      </div>
+
+      <div className="completedTask">
+        <h2>Completed Tasks</h2>
+        {
+          completedTask.map((task, index) => (
+            <Card 
+              key={index}
+              name={task}
+              click1={() => handleUncompleteTask(task)}
+              children1="Uncomplete"
             />
           ))}
       </div>
