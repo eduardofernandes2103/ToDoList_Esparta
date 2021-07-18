@@ -3,7 +3,7 @@ const Card = ({name, click1, children1, click2}) => {
         <div>
             <h3>{name}</h3>
             <button onClick={ click1 }>{ children1 }</button>
-            <button onClick={ click2 }> Remover </button>
+            <button onClick={ click2 }> Remove </button>
         </div>
     )
 }

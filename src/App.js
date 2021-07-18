@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Card from './components/Card'
 import './App.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <div>
+      
       <div className="addTaskplace">
         <input 
                 placeholder="New Task Name"
@@ -20,6 +22,19 @@ function App() {
         />
         <button onClick={() => handleAddTask()}>+ New Task</button>
       </div>
+
+      <div className="taskToDo">
+        <h2>Tasks To Do</h2>
+        {
+          tasks.map((task, index) => (
+            <Card 
+              key={index}
+              name={task}
+              children1="Done!"
+            />
+          ))}
+      </div>
+
     </div>
   );
 }
