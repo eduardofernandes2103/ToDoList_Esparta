@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Card from './components/Card'
-import './App.css';
+import { Container } from './styles'
+
 
 function App() {
   const [ addTask, setAddTask ] = useState("");
@@ -18,7 +19,7 @@ function App() {
   }
 
   const handleUncompleteTask = (task) => {
-    const newElement = tasks.filter((element) => element !== task)
+    const newElement = completedTask.filter((element) => element !== task)
     setCompletedTask(newElement);
     setTasks([...tasks, task])
   }
@@ -29,51 +30,52 @@ function App() {
   }
 
   const handleRemoveCompleted = (task) => {
-    const newElement = tasks.filter((element) => element !== task)
+    const newElement = completedTask.filter((element) => element !== task)
     setCompletedTask(newElement);
   }
   
   return (
-    <div>
+    <Container>
       
-      <div className="addTaskplace">
-        <input 
-                placeholder="New Task Name"
-                value={addTask}
-                onChange={(e) => setAddTask(e.target.value) }    
-        />
-        <button onClick={() => handleAddTask()}>+ New Task</button>
+      <input 
+              placeholder="New Task Name"
+              value={addTask}
+              onChange={(e) => setAddTask(e.target.value) }    
+      />
+      <button onClick={() => handleAddTask()}>+ New Task</button>
+  
+
+      <div className="lists">
+        <div className="taskToDo">
+          <h2>Tasks To Do</h2>
+          {
+            tasks.map((task, index) => (
+              <Card 
+                key={index}
+                name={task}
+                click1={() => handleCompleteTask(task)}
+                children1="Done!"
+                click2={() => handleRemoveTasks(task)}
+              />
+            ))}
+        </div>
+
+        <div className="completedTask">
+          <h2>Completed Tasks</h2>
+          {
+            completedTask.map((task, index) => (
+              <Card 
+                key={index}
+                name={task}
+                click1={() => handleUncompleteTask(task)}
+                children1="Uncomplete"
+                click2={() => handleRemoveCompleted(task)}
+              />
+            ))}
+        </div>
       </div>
 
-      <div className="taskToDo">
-        <h2>Tasks To Do</h2>
-        {
-          tasks.map((task, index) => (
-            <Card 
-              key={index}
-              name={task}
-              click1={() => handleCompleteTask(task)}
-              children1="Done!"
-              click2={() => handleRemoveTasks(task)}
-            />
-          ))}
-      </div>
-
-      <div className="completedTask">
-        <h2>Completed Tasks</h2>
-        {
-          completedTask.map((task, index) => (
-            <Card 
-              key={index}
-              name={task}
-              click1={() => handleUncompleteTask(task)}
-              children1="Uncomplete"
-              click2={() => handleRemoveCompleted(task)}
-            />
-          ))}
-      </div>
-
-    </div>
+    </Container>
   );
 }
 
