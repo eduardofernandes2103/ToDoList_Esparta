@@ -11,18 +11,27 @@ function App() {
     setTasks([...tasks, addTask])
   }
 
-  const handleCompleteTask = (task) =>{
+  const handleCompleteTask = (task) => {
     const newElement = tasks.filter((element) => element !== task)
     setTasks(newElement);
     setCompletedTask([...completedTask, task])
   }
 
-  const handleUncompleteTask = (task) =>{
+  const handleUncompleteTask = (task) => {
     const newElement = tasks.filter((element) => element !== task)
     setCompletedTask(newElement);
     setTasks([...tasks, task])
   }
 
+  const handleRemoveTasks = (task) => {
+    const newElement = tasks.filter((element) => element !== task)
+    setTasks(newElement);
+  }
+
+  const handleRemoveCompleted = (task) => {
+    const newElement = tasks.filter((element) => element !== task)
+    setCompletedTask(newElement);
+  }
   
   return (
     <div>
@@ -45,6 +54,7 @@ function App() {
               name={task}
               click1={() => handleCompleteTask(task)}
               children1="Done!"
+              click2={() => handleRemoveTasks(task)}
             />
           ))}
       </div>
@@ -58,6 +68,7 @@ function App() {
               name={task}
               click1={() => handleUncompleteTask(task)}
               children1="Uncomplete"
+              click2={() => handleRemoveCompleted(task)}
             />
           ))}
       </div>
